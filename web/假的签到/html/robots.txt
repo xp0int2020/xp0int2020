@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /phpp_tql.php

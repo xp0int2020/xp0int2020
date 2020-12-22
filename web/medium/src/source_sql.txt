@@ -1,0 +1,31 @@
+<?php
+header("Content-Type: text/html;charset=utf-8");
+session_start();
+$str = '';
+$all_alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+if($_GET['source']==='1')
+	highlight_file('source_sql.txt');
+
+if(!isset($_SESSION['random_num'])){
+	$_SESSION['random_num']=rand(0,99999999999);
+}
+
+mt_srand($_SESSION['random_num']);
+
+
+$flag_len = 30;
+for ( $i = 0; $i < $flag_len; $i++ ){
+    $str.=substr($all_alpha, mt_rand(0, strlen($all_alpha) - 1), 1);       
+}
+$flag_show = substr($str, 0, 11);
+echo "<p>".'我偷看到了张三的一部分flag:'.$flag_show."</p>";
+
+
+if(isset($_POST['flag'])){
+    if($_POST['flag']===$str){
+        echo "<p>你真是个小天才，给你ctf{xxxxxxxxxxxxxxxxxxxxxxxxxx}</p>";
+    }
+    else{
+        echo "<p>小盆友，你对张三的flag一无所知</p>";
+    }
+}
